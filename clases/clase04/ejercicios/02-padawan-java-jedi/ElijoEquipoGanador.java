@@ -1,4 +1,4 @@
-public class EquiposGanadores {
+public class ElijoEquipoGanador {
     public static void main(String[] args) {
         // equipos
         String equipo1 = "Manchester City";
@@ -23,12 +23,14 @@ public class EquiposGanadores {
         String opcionElegida = "2";
 
         if (opcionElegida == "1") {
-            System.out.printf("Manchester City: %s(DT)\n- %s\n- %s\n- %s\n", dtEquipo2, mancityJugador1,
+            System.out.println(menu);
+            System.out.printf("%s: %s(DT)\n- %s\n- %s\n- %s\n", equipo1, dtEquipo2, mancityJugador1,
                     mancityJugador2,
                     mancityJugador3);
 
         } else if (opcionElegida == "2") {
-            System.out.printf("Real Madrid: %s(DT)\n- %s\n- %s\n- %s\n", dtEquipo1, realMadridJugador1,
+            System.out.println(menu);
+            System.out.printf("%s: %s(DT)\n- %s\n- %s\n- %s\n", equipo2, dtEquipo1, realMadridJugador1,
                     realMadridJugador2,
                     realMadridJugador3);
         } else {
