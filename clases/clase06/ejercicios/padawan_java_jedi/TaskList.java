@@ -13,7 +13,7 @@ public class TaskList {
         Scanner input = new Scanner(System.in);
         TaskList instancia = new TaskList();
 
-        boolean runAgain = Boolean.FALSE;
+        boolean runAgain;
         do {
             instancia.showMenu();
             runAgain = instancia.executeOption(input);
@@ -31,17 +31,17 @@ public class TaskList {
     }
 
     private String printTasks() {
-        if (this.tasks.size() == 0) {
+        if (this.tasks.isEmpty()) {
             return "No pending tasks...\n\n";
         }
 
-        String tasks = "";
+        StringBuilder tasks = new StringBuilder();
         for (Task t : this.tasks) {
-            tasks += String.format("-[%d] %s\n\t%s\n\texpiration date: %s.\n", t.id, t.title, t.description,
-                    t.expirationDate);
+            tasks.append(String.format("-[%d] %s\n\t%s\n\texpiration date: %s.\n", t.id, t.title, t.description,
+                    t.expirationDate));
         }
-        tasks += "\n";
-        return tasks;
+        tasks.append("\n");
+        return tasks.toString();
     }
 
     private String printOptions() {
