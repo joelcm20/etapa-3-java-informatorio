@@ -24,7 +24,7 @@ public class AgendaContactos {
 
 
     public void mostrarMenu() {
-        String menu = "1. Listar Contactos.\n2. Agregar Contacto.\n0. Salir.";
+        String menu = "1. Listar Contactos.\n2. Agregar Contacto.\n3. Buscar Contacto.\n4. Eliminar Contacto.\n0. Salir.";
         System.out.println(menu);
     }
 
@@ -38,7 +38,13 @@ public class AgendaContactos {
                 this.listarContactos();
                 break;
             case "2":
-                this.agregarContacto(input);
+                this.crearContacto(input);
+                break;
+            case "3":
+                this.buscarContacto(input);
+                break;
+            case "4":
+                this.eliminarContacto(input);
                 break;
             case "0":
                 continuarEjecucion = Boolean.FALSE;
@@ -58,14 +64,15 @@ public class AgendaContactos {
         } else {
             StringBuilder contactos = new StringBuilder();
             for (Contacto c : this.contactos) {
-                contactos.append(String.format("- %s Nº %s - %s\n", c.nombre, c.telefono, c.correo));
+                contactos.append(String.format("-ID[%s] %s Nº %s - %s\n", c.id, c.nombre, c.telefono, c.correo));
             }
             System.out.println(contactos);
         }
     }
 
-    private void agregarContacto(Scanner input) {
+    private void crearContacto(Scanner input) {
         Contacto contacto = new Contacto();
+        contacto.id = this.contactos.size();
 
         System.out.print("Nombre >> ");
         contacto.nombre = input.nextLine();
@@ -81,8 +88,28 @@ public class AgendaContactos {
         this.contactos.add(c);
     }
 
-    private void eliminarContacto() {
-        this.contac
+    private void eliminarContacto(Scanner input) {
+        System.out.print("ingresar id del contacto >> ");
+        int idContacto = Integer.parseInt(input.nextLine());
+        boolean ok = this.contactos.removeIf(contacto -> contacto.id == idContacto);
+        if (ok) {
+            System.out.println("Contacto eliminado.");
+        } else {
+            System.out.println("Error al eliminar contacto.");
+        }
+    }
+
+    private void buscarContacto(Scanner input) {
+        System.out.print("ingresa un nombre >> ");
+        String nombreContacto = input.nextLine();
+
+        StringBuilder contactos = new StringBuilder();
+        for (Contacto c : this.contactos) {
+            if (c.nombre.contains(nombreContacto)) {
+                contactos.append(String.format("-ID[%s] %s Nº %s - %s\n", c.id, c.nombre, c.telefono, c.correo));
+            }
+        }
+        System.out.println(contactos);
     }
 }
 
